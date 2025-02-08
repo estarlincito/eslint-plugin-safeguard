@@ -1,0 +1,49 @@
+{
+  "name": "eslint-plugin-safeguard",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A custom ESLint plugin that provides multiple rules to enforce best practices and code safety.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "safeguard",
+    "trycatch-ensurer"
+  ],
+  "author": {
+    "name": "Estarlin R",
+    "email": "dev@estarlincito.com",
+    "url": "https://estarlincito.com"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist",
+    "docs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/estarlincito/eslint-plugin-safeguard#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estarlincito/eslint-plugin-safeguard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estarlincito/eslint-plugin-safeguard/issues"
+  },
+  "engines": {
+    "node": "^23"
+  },
+  "peerDependencies": {
+    "eslint": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "eslint": "^7.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
