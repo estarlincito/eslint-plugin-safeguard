@@ -1,6 +1,6 @@
-# ESLint Plugin Safeguard
+# ESLint Rule trycatch ensurer
 
-This is an ESLint plugin that ensures `await` expressions are inside `try-catch` blocks, helping to prevent unhandled promise rejections and improve code robustness.
+This is an ESLint rule that ensures `await` expressions are inside `try-catch` blocks, helping to prevent unhandled promise rejections and improve code robustness.
 
 ## 📌 Features
 
@@ -20,9 +20,7 @@ npm install --save-dev eslint-plugin-safeguard
 yarn add -D eslint-plugin-safeguard
 ```
 
-<!-- ## ⚙️ Configuration -->
-
-2. Add the plugin to your ESLint configuration(eslint.config.js):
+2. Add the rule to your ESLint configuration(eslint.config.js):
 
 ```js
 import safeguard from 'eslint-plugin-safeguard';
@@ -72,18 +70,6 @@ async function fetchData() {
 - The rule checks if an `await` expression appears inside a `try` block.
 - If no `try-catch` block is found, ESLint will report an error.
 - If a `try` block is found **but lacks a `catch` handler**, the rule will also trigger a warning.
-
-## 🎯 Example ESLint Configuration
-
-```json
-{
-  "extends": ["eslint:recommended"],
-  "plugins": ["safeguard"],
-  "rules": {
-    "safeguard/trycatch-ensurer": "warn"
-  }
-}
-```
 
 ## 📝 License
 

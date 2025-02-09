@@ -1,9 +1,9 @@
-import trycatchEnsurer from './lib/rules/trycatch-ensurer.js';
+import rules from './lib/rules/index.js';
+//import configs from './lib/utils/configs.js';
 
-export default {
-  rules: {
-    'trycatch-ensurer': trycatchEnsurer,
-  },
+const safeguard = {
+  rules,
+  // configs,
 };
 
-console.log('');
+export default safeguard;

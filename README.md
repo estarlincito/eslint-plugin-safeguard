@@ -24,6 +24,8 @@ yarn add -D eslint-plugin-safeguard
 
 ### 🔹 [trycatch-ensurer](/docs/rules/trycatch-ensurer.md)
 
+### 🔹 [no-raw-error](/docs/rules/no-raw-error.md)
+
 ## 📝 Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue at [GitHub Issues](https://github.com/estarlincito/eslint-plugin-safeguard/issues).
