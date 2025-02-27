@@ -1,13 +1,21 @@
 {
   "name": "eslint-plugin-safeguard",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "description": "A custom ESLint plugin that provides multiple rules to enforce best practices and code safety.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
+  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "lint": "eslint ."
+    "build": "pnpm vite build",
+    "lint": "eslint .",
+    "git": "rm -rf dist && pnpm build && read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push && npm publish --access public"
   },
   "keywords": [
     "eslint",
@@ -41,20 +49,28 @@
   "peerDependencies": {
     "eslint": "^9.20.0"
   },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.20.0",
-    "@types/eslint": "^9.6.1",
-    "@types/node": "^22.13.1",
-    "@typescript-eslint/eslint-plugin": "^8.23.0",
+  "dependencies": {
     "@typescript-eslint/utils": "^8.23.0",
     "eslint": "^9.20.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "prettier": "^3.4.2",
-    "ts-node": "^10.9.0",
     "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@estarlincito/eslint": "^1.7.1",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.13.1",
+    "ts-node": "^10.9.0",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.0"
+  },
+  "publishConfig": {
+    "bundleDependencies": [
+      "typescript",
+      "eslint"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

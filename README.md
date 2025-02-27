@@ -26,6 +26,8 @@ yarn add -D eslint-plugin-safeguard
 
 ### 🔹 [no-raw-error](/docs/rules/no-raw-error.md)
 
+### 🔹 [consistent-import-name](/docs/rules/consistent-import-name.md)
+
 ## 📝 Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue at [GitHub Issues](https://github.com/estarlincito/eslint-plugin-safeguard/issues).

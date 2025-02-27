@@ -24,13 +24,13 @@ yarn add -D eslint-plugin-safeguard
 2. Add the rule to your ESLint configuration (`eslint.config.js`):
 
 ```js
-import noRawError from 'eslint-plugin-safeguard';
+import safeguard from 'eslint-plugin-safeguard';
 ```
 
 ```js
 {
   plugins: {
-    noRawError,
+    safeguard,
   },
 
   "rules": {
