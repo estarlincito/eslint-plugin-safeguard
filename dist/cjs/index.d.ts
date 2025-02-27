@@ -1,20 +1,20 @@
 declare const safeguard: {
     rules: {
-        'trycatch-ensurer': {
+        'consistent-import-name': import("eslint").Rule.RuleModule;
+        'no-raw-error': {
+            create: (context: import("eslint").Rule.RuleContext) => {
+                CallExpression: (node: import("eslint").Rule.Node) => void;
+                NewExpression: (node: import("eslint").Rule.Node) => void;
+            };
             meta: import("eslint").Rule.RuleMetaData;
+        };
+        'no-self-assignments': import("eslint").Rule.RuleModule;
+        'trycatch-ensurer': {
             create: (context: import("eslint").Rule.RuleContext) => {
                 AwaitExpression(node: import("eslint").Rule.Node): void;
             };
-        };
-        'no-raw-error': {
             meta: import("eslint").Rule.RuleMetaData;
-            create: (context: import("eslint").Rule.RuleContext) => {
-                NewExpression: (node: import("eslint").Rule.Node) => void;
-                CallExpression: (node: import("eslint").Rule.Node) => void;
-            };
         };
-        'consistent-import-name': import("eslint").Rule.RuleModule;
-        'no-self-assignments': import("eslint").Rule.RuleModule;
     };
 };
 export default safeguard;

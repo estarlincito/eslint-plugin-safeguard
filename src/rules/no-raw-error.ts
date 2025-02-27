@@ -1,8 +1,7 @@
-import { type Rule } from 'eslint';
 import { TSESTree } from '@typescript-eslint/utils';
+import { type Rule } from 'eslint';
 
 const meta: Rule.RuleMetaData = {
-  type: 'problem',
   docs: {
     description: 'Disallow direct use of Error constructor',
     recommended: true,
@@ -11,6 +10,7 @@ const meta: Rule.RuleMetaData = {
     noRawError: 'Avoid using raw "Error". Use a custom error class instead.',
   },
   schema: [],
+  type: 'problem',
 };
 
 const create = (context: Rule.RuleContext) => {
@@ -18,15 +18,15 @@ const create = (context: Rule.RuleContext) => {
     const { callee } = node as TSESTree.CallExpression | TSESTree.NewExpression;
 
     if (callee.type === 'Identifier' && callee.name === 'Error') {
-      context.report({ node, messageId: 'noRawError' });
+      context.report({ messageId: 'noRawError', node });
     }
   }
 
   return {
-    NewExpression: checkErrorCallee,
     CallExpression: checkErrorCallee,
+    NewExpression: checkErrorCallee,
   };
 };
 
-const rule = { meta, create };
+const rule = { create, meta };
 export default rule;

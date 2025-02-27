@@ -27,9 +27,9 @@ export default defineConfig({
   build: {
     ssr: true,
     lib: {
-      entry: entry,
+      entry,
     },
-    minify: true,
+    minify: false,
     target: 'esnext',
 
     rollupOptions: {

@@ -1,27 +1,24 @@
-import { Rule } from 'eslint';
 import ts from 'typescript';
 
-const meta: Rule.RuleMetaData = {
-  type: 'problem',
+const meta = {
   docs: {
-    description: 'Ensure import names match the original exported names',
-    recommended: true,
+    description: "Ensure import names match the original exported names",
+    recommended: true
   },
   messages: {
     defaultImportMismatch: "Default import name must be '{{originalName}}'",
-    noRenamedImports: "Use original name '{{importedName}}'",
+    noRenamedImports: "Use original name '{{importedName}}'"
   },
   schema: [],
+  type: "problem"
 };
-
-const create: Rule.RuleModule['create'] = (context) => {
+const create = (context) => {
   const parserServices = context.sourceCode.parserServices;
   if (!parserServices?.program || !parserServices.esTreeNodeToTSNodeMap) {
     return {};
   }
   const checker = parserServices.program.getTypeChecker();
-
-  function getDefaultExportName(symbol: ts.Symbol): string | null {
+  function getDefaultExportName(symbol) {
     const declarations = symbol.getDeclarations() ?? [];
     for (const declaration of declarations) {
       if (ts.isFunctionDeclaration(declaration) && declaration.name) {
@@ -33,56 +30,45 @@ const create: Rule.RuleModule['create'] = (context) => {
     }
     return null;
   }
-
   return {
     ImportDeclaration(node) {
       if (!node.source) return;
-
-      // Handle default imports
       const defaultSpecifier = node.specifiers.find(
-        (s) => s.type === 'ImportDefaultSpecifier',
+        (s) => s.type === "ImportDefaultSpecifier"
       );
-
       if (defaultSpecifier) {
         const localName = defaultSpecifier.local.name;
         const tsNode = parserServices.esTreeNodeToTSNodeMap.get(node.source);
-
         const moduleSymbol = checker.getSymbolAtLocation(tsNode);
-
         if (moduleSymbol) {
           const exports = checker.getExportsOfModule(moduleSymbol);
           const defaultExport = exports.find(
-            (e: { escapedName: string }) => e.escapedName === 'default',
+            (e) => e.escapedName === "default"
           );
-
           if (defaultExport) {
             const originalName = getDefaultExportName(defaultExport);
             if (originalName && originalName !== localName) {
               context.report({
-                node: defaultSpecifier,
-                messageId: 'defaultImportMismatch',
                 data: { originalName },
+                messageId: "defaultImportMismatch",
+                node: defaultSpecifier
               });
             }
           }
         }
       }
-
       node.specifiers.forEach((specifier) => {
-        if (
-          specifier.type === 'ImportSpecifier' &&
-          specifier.imported.type === 'Identifier' &&
-          specifier.imported.name !== specifier.local.name
-        ) {
+        if (specifier.type === "ImportSpecifier" && specifier.imported.type === "Identifier" && specifier.imported.name !== specifier.local.name) {
           context.report({
-            node: specifier,
-            messageId: 'noRenamedImports',
             data: { importedName: specifier.imported.name },
+            messageId: "noRenamedImports",
+            node: specifier
           });
         }
       });
-    },
+    }
   };
 };
-const rule: Rule.RuleModule = { meta, create };
-export default rule;
+const rule = { create, meta };
+
+export { rule as default };

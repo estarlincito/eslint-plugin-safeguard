@@ -1,8 +1,8 @@
-import r from "./lib/rules/index.mjs";
-const e = {
-  rules: r
+import rules from './rules/index.mjs';
+
+const safeguard = {
+  rules
   // configs,
 };
-export {
-  e as default
-};
+
+export { safeguard as default };

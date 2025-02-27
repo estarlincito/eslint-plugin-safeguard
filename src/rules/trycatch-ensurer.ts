@@ -1,12 +1,12 @@
 import { Rule } from 'eslint';
 
 const meta: Rule.RuleMetaData = {
-  type: 'problem',
   docs: {
     description: 'Ensure that await expressions are inside try-catch blocks',
     recommended: true,
   },
   schema: [],
+  type: 'problem',
 };
 
 const create = (context: Rule.RuleContext) => {
@@ -32,8 +32,8 @@ const create = (context: Rule.RuleContext) => {
             if (tryStatement.handler) return;
 
             context.report({
-              node,
               message: 'Await expressions should be inside a try-catch block.',
+              node,
             });
             return;
           }
@@ -43,12 +43,12 @@ const create = (context: Rule.RuleContext) => {
 
       // No enclosing try-catch found
       context.report({
-        node,
         message: 'Await expressions should be inside a try-catch block.',
+        node,
       });
     },
   };
 };
 
-const rule = { meta, create };
+const rule = { create, meta };
 export default rule;

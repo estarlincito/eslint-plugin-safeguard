@@ -1,4 +1,4 @@
-import rules from './lib/rules/index.js';
+import rules from './rules/index.js';
 //import configs from './lib/utils/configs.js';
 
 const safeguard = {

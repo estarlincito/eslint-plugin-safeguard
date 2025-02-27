@@ -1,8 +1,8 @@
 import { Rule } from 'eslint';
 declare const rule: {
-    meta: Rule.RuleMetaData;
     create: (context: Rule.RuleContext) => {
         AwaitExpression(node: Rule.Node): void;
     };
+    meta: Rule.RuleMetaData;
 };
 export default rule;

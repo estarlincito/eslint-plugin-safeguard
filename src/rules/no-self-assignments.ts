@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Rule } from 'eslint';
 
 /**
@@ -34,17 +35,17 @@ function isEquivalent(node1: any, node2: any): boolean {
  * Rule metadata.
  */
 const meta: Rule.RuleMetaData = {
-  type: 'problem',
   docs: {
     description:
       'Detects self-assignment patterns, such as `array.push(...array)` or `obj.prop = obj.prop`, which are likely logic errors.',
     recommended: false,
   },
-  schema: [],
   messages: {
     noSelfAssignment:
       'Detected self-assignment in "{{name}}", which is likely an error.',
   },
+  schema: [],
+  type: 'problem',
 };
 
 /**
@@ -83,9 +84,9 @@ const create: Rule.RuleModule['create'] = (context) => {
         }
 
         context.report({
-          node,
-          messageId: 'noSelfAssignment',
           data: { name },
+          messageId: 'noSelfAssignment',
+          node,
         });
       }
     },
@@ -108,9 +109,9 @@ const create: Rule.RuleModule['create'] = (context) => {
       ) {
         if (node.callee.object.name === node.arguments[0].argument.name) {
           context.report({
-            node,
-            messageId: 'noSelfAssignment',
             data: { name: node.callee.object.name },
+            messageId: 'noSelfAssignment',
+            node,
           });
         }
       }
@@ -124,5 +125,5 @@ const create: Rule.RuleModule['create'] = (context) => {
  *
  * @type {Rule.RuleModule}
  */
-const rule: Rule.RuleModule = { meta, create };
+const rule: Rule.RuleModule = { create, meta };
 export default rule;

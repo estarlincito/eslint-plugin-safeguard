@@ -1,20 +1,22 @@
 {
   "name": "eslint-plugin-safeguard",
   "type": "module",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A custom ESLint plugin that provides multiple rules to enforce best practices and code safety.",
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
     }
   },
-  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "pnpm vite build",
-    "lint": "eslint .",
+    "build": "eslint . && pnpm vite build",
     "git": "rm -rf dist && pnpm build && read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push && npm publish --access public"
   },
   "keywords": [
